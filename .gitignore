@@ -1,0 +1,17 @@
+# Maven
+target/
+
+# TestNG
+test-output/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
