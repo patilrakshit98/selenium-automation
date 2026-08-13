@@ -35,7 +35,6 @@ jobs:
         id: selenium-tests
         run: |
           xvfb-run -a mvn clean test
-        continue-on-error: true
 
       - name: Upload Selenium debug files
         if: always()
