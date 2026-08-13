@@ -10,7 +10,7 @@ public class VerifyBrowserLaunch extends BaseTest{
 	public void verifyBrowserLaunchTest() {
 		String title = driver.getTitle();
 		System.out.println("Page title: "+title);
-		Assert.assertTrue(title.contains("Myntra"));
+		Assert.assertTrue(title.toLowerCase().contains("myntra"));
 	}
 
 }
