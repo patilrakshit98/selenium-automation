@@ -4,15 +4,18 @@ on:
   push:
     branches:
       - main
+
   pull_request:
     branches:
       - main
 
 jobs:
+
   test:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v5
 
@@ -23,5 +26,27 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Install Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+
       - name: Run Selenium tests
-        run: mvn clean test
+        id: selenium-tests
+        run: |
+          xvfb-run -a mvn clean test
+        continue-on-error: true
+
+      - name: Upload Selenium debug files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-debug
+          path: |
+            myntra-debug.html
+            myntra-debug.png
+            target/surefire-reports/
+
+      - name: Fail workflow if tests failed
+        if: steps.selenium-tests.outcome == 'failure'
+        run: exit 1
