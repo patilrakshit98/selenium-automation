@@ -1,18 +1,21 @@
 package base;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import driver.DriverFactory;
 
 public class BaseTest {
 
     protected WebDriver driver;
 
     @BeforeMethod
-    public void setup(){
+    public void setup() throws IOException {
 
-        driver = new ChromeDriver();
+        driver = DriverFactory.createDriver();
 
         driver.get("https://www.myntra.com/");
 
